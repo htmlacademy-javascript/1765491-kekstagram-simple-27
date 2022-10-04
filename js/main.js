@@ -2,7 +2,6 @@
 function randomGenerator(minNumber, maxNumber) {
   if (minNumber >= 0 && maxNumber > 1 && maxNumber > minNumber) {
     const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber);
-    console.log(randomNumber);
     return randomNumber;
   }
 }
