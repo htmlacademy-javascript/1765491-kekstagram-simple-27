@@ -10,15 +10,15 @@ randomGenerator(1, 200);
 //функция ниже проверяет длину строки
 
 function commentCheck(commentLenght, maxCommentLenght) {
-  return commentLenght <= maxCommentLenght
+  return commentLenght <= maxCommentLenght;
 }
-commentCheck(100, 140)
+commentCheck(100, 140);
 
 
-let descriptionContainer = ["Black cat photo", "Orange cat photo", "White cat photo"];
+const descriptionContainer = ['Black cat photo', 'Orange cat photo', 'White cat photo'];
 //ниже - получаем случайный комментарий из массива строк
 function getComment() {
-  return descriptionContainer[randomGenerator(0, descriptionContainer.length - 1)]
+  return descriptionContainer[randomGenerator(0, descriptionContainer.length - 1)];
 }
 //ниже функция для генерации объекта с (массив,количество_элементов)
 function getArray(array, count) {
@@ -34,5 +34,5 @@ function getArray(array, count) {
   return array;
 }
 
-let test = [];
+const test = [];
 getArray(test, 25);
