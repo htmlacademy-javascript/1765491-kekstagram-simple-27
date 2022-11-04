@@ -1,3 +1,5 @@
 import {getArray} from './get-photo-properties.js';
-const test=[];
-getArray(test, 25);
+import {miniatureGenerator} from './miniature-generator.js';
+const test = [];
+getArray(test, 19);
+miniatureGenerator(test);
