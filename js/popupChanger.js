@@ -1,5 +1,5 @@
 import {img,filterChanger,filterList} from './filterchanger.js';
-import {scaleDown, scaleUp, scaleLower, scaleUpper, scaleValue} from './scale-changer.js';
+import {scaleDown, scaleUp, scaleLower, scaleUpper, scaleValue, DEFAULT_SCALE_VALUE} from './scale-changer.js';
 const body = document.querySelector('body')
 const popup = document.querySelector('#upload-file');
 const popupWindow = document.querySelector('.img-upload__overlay');
@@ -16,7 +16,7 @@ const pressEsc = (evt) => {
 const popupOpen = function () {
   popup.addEventListener('change', (evt)=>{
     img.setAttribute("style", `transform:scale(0.55)`)
-    scaleValue.value="55%"
+    scaleValue.value=DEFAULT_SCALE_VALUE
     popupWindow.classList.remove('hidden')
     body.classList.add('modal-open')
     document.addEventListener('keydown', pressEsc)
