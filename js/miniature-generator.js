@@ -1,7 +1,7 @@
 const photoContainer = document.querySelector('.pictures');
 const field = document.querySelector('#picture').content;
 const pictureField = field.querySelector('.picture');
-const uselessFragment = document.createDocumentFragment();
+const picWrapper = document.createDocumentFragment();
 const miniatureGenerator = function (array) {
   for (let i = 0; i < array.length; i++) {
     const miniPic = pictureField.cloneNode(true);
@@ -12,10 +12,10 @@ const miniatureGenerator = function (array) {
     url.alt = array[i].description;
     comments.insertAdjacentHTML('beforeend', array[i].comments);
     likes.insertAdjacentHTML('beforeend', array[i].likes);
-    uselessFragment.appendChild(miniPic);
+    picWrapper.appendChild(miniPic);
 
   }
-  photoContainer.appendChild(uselessFragment);
+  photoContainer.appendChild(picWrapper);
 };
 
 export {miniatureGenerator};
