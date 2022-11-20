@@ -1,5 +1,6 @@
 import {img,filterChanger,filterList} from './filterchanger.js';
 import {scaleDown, scaleUp, scaleLower, scaleUpper, scaleValue, DEFAULT_SCALE_VALUE} from './scale-changer.js';
+import { form, sender } from './data-submit.js';
 const body = document.querySelector('body')
 const popup = document.querySelector('#upload-file');
 const popupWindow = document.querySelector('.img-upload__overlay');
@@ -14,6 +15,7 @@ const pressEsc = (evt) => {
     scaleUp.removeEventListener('click', scaleUpper)
 }
 const popupOpen = function () {
+
   popup.addEventListener('change', (evt)=>{
     img.setAttribute("style", `transform:scale(0.55)`)
     scaleValue.value=DEFAULT_SCALE_VALUE
@@ -23,6 +25,7 @@ const popupOpen = function () {
     filterList.addEventListener('change', filterChanger)
     scaleDown.addEventListener('click', scaleLower)
     scaleUp.addEventListener('click', scaleUpper)
+    form.addEventListener('submit', sender)
   }
   )
 
@@ -40,8 +43,9 @@ const popupClose = function (){
     filterList.removeEventListener('change', filterChanger)
     scaleDown.removeEventListener('click', scaleLower)
     scaleUp.removeEventListener('click', scaleUpper)
+    form.removeEventListener('submit', sender)
     img.removeAttribute('class')
   }
   )
 };
-export{popupClose, popupOpen};
+export{popupClose, popupOpen, pressEsc, commentText, popup};
