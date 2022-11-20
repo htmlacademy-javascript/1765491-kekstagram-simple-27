@@ -18,5 +18,5 @@ const showAlert = (message, color) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-}
-export {showAlert}
+};
+export {showAlert};
