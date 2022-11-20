@@ -1,19 +1,19 @@
-import { scaleFactor } from "./scale-changer.js"
-const sliderWrapper = document.querySelector('.effect-level__slider')
-const imgWrapper = document.querySelector('.img-upload__preview')
-const img = imgWrapper.querySelector('img')
-const filterList = document.querySelector('.effects__list')
-let filterStyle = " "
-let filter
-let filterValue
-const effectLevelValue = document.querySelector('.effect-level__value')
+import { scaleFactor } from './scale-changer.js';
+const sliderWrapper = document.querySelector('.effect-level__slider');
+const imgWrapper = document.querySelector('.img-upload__preview');
+const img = imgWrapper.querySelector('img');
+const filterList = document.querySelector('.effects__list');
+let filterStyle = ' ';
+let filter;
+let filterValue;
+const effectLevelValue = document.querySelector('.effect-level__value');
 
 function filterApply (evt) {
-if (evt.target.matches('input[id="effect-none"]')){
+  if (evt.target.matches('input[id="effect-none"]')){
     sliderWrapper.setAttribute('disabled', true);
-    effectLevelValue.setAttribute("value","")
-      filterStyle = " "
-      img.setAttribute("style", `transform:scale(${scaleFactor})${filterStyle}`);
+    effectLevelValue.setAttribute('value','');
+    filterStyle = ' ';
+    img.setAttribute('style', `transform:scale(${scaleFactor})${filterStyle}`);
   }
 
   if (evt.target.matches('input[id="effect-chrome"]')){
@@ -25,13 +25,13 @@ if (evt.target.matches('input[id="effect-none"]')){
       start:1,
       step: 0.1
     });
-    filter = "grayscale"
+    filter = 'grayscale';
     sliderWrapper.removeAttribute('disabled', true);
     sliderWrapper.noUiSlider.on('update', () => {
       filterValue = sliderWrapper.noUiSlider.get();
-      effectLevelValue.setAttribute("value",`${filterValue}`)
-      filterStyle = `; filter:${filter}(${filterValue})`
-      img.setAttribute("style", `transform:scale(${scaleFactor})${filterStyle}`);
+      effectLevelValue.setAttribute('value',`${filterValue}`);
+      filterStyle = `; filter:${filter}(${filterValue})`;
+      img.setAttribute('style', `transform:scale(${scaleFactor})${filterStyle}`);
     });
   }
 
@@ -44,13 +44,13 @@ if (evt.target.matches('input[id="effect-none"]')){
       start:1,
       step: 0.1
     });
-    filter = "sepia"
+    filter = 'sepia';
     sliderWrapper.removeAttribute('disabled', true);
     sliderWrapper.noUiSlider.on('update', () => {
       filterValue = sliderWrapper.noUiSlider.get();
-      effectLevelValue.setAttribute("value",`${filterValue}`)
-      filterStyle = `; filter:${filter}(${filterValue})`
-      img.setAttribute("style", `transform:scale(${scaleFactor})${filterStyle}`);
+      effectLevelValue.setAttribute('value',`${filterValue}`);
+      filterStyle = `; filter:${filter}(${filterValue})`;
+      img.setAttribute('style', `transform:scale(${scaleFactor})${filterStyle}`);
     });
   }
 
@@ -63,13 +63,13 @@ if (evt.target.matches('input[id="effect-none"]')){
       start:100,
       step: 1
     });
-    filter = "invert"
+    filter = 'invert';
     sliderWrapper.removeAttribute('disabled', true);
     sliderWrapper.noUiSlider.on('update', () => {
       filterValue = sliderWrapper.noUiSlider.get();
-      effectLevelValue.setAttribute("value",`${filterValue}%`)
-      filterStyle = `; filter:${filter}(${filterValue}%)`
-      img.setAttribute("style", `transform:scale(${scaleFactor})${filterStyle}`);
+      effectLevelValue.setAttribute('value',`${filterValue}%`);
+      filterStyle = `; filter:${filter}(${filterValue}%)`;
+      img.setAttribute('style', `transform:scale(${scaleFactor})${filterStyle}`);
     });
   }
 
@@ -82,13 +82,13 @@ if (evt.target.matches('input[id="effect-none"]')){
       start:3,
       step: 0.1
     });
-    filter = "blur"
+    filter = 'blur';
     sliderWrapper.removeAttribute('disabled', true);
     sliderWrapper.noUiSlider.on('update', () => {
       filterValue = sliderWrapper.noUiSlider.get();
-      effectLevelValue.setAttribute("value",`${filterValue}px`)
-      filterStyle = `; filter:${filter}(${filterValue}px)`
-      img.setAttribute("style", `transform:scale(${scaleFactor})${filterStyle}`);
+      effectLevelValue.setAttribute('value',`${filterValue}px`);
+      filterStyle = `; filter:${filter}(${filterValue}px)`;
+      img.setAttribute('style', `transform:scale(${scaleFactor})${filterStyle}`);
     });
   }
 
@@ -101,13 +101,13 @@ if (evt.target.matches('input[id="effect-none"]')){
       start:3,
       step: 0.1
     });
-    filter = "brightness"
+    filter = 'brightness';
     sliderWrapper.removeAttribute('disabled', true);
     sliderWrapper.noUiSlider.on('update', () => {
       filterValue = sliderWrapper.noUiSlider.get();
-      effectLevelValue.setAttribute("value",`${filterValue}`)
-      filterStyle = `; filter:${filter}(${filterValue})`
-      img.setAttribute("style", `transform:scale(${scaleFactor})${filterStyle}`);
+      effectLevelValue.setAttribute('value',`${filterValue}`);
+      filterStyle = `; filter:${filter}(${filterValue})`;
+      img.setAttribute('style', `transform:scale(${scaleFactor})${filterStyle}`);
     });
   }
 
@@ -125,8 +125,8 @@ const startSlider = function () {
     step: 0.1,
     connect: 'lower',
   });
-  filterList.addEventListener('change', filterApply)
-}
+  filterList.addEventListener('change', filterApply);
+};
 
 
-export{startSlider, filterStyle}
+export{startSlider, filterStyle};
