@@ -10,8 +10,8 @@ const scaleLower = function () {
   let scaleNumber = Number(scaleValue.value.replace(/[^0-9]/g,''));
   scaleNumber = scaleNumber - stepScale;
   scaleValue.value = `${scaleNumber }%`;
-  if (scaleNumber <= 0) {
-    scaleNumber = 0;
+  if (scaleNumber < 25) {
+    scaleNumber = 25;
     scaleValue.value = `${scaleNumber }%`;
   }
   scaleFactor = scaleNumber / 100;
