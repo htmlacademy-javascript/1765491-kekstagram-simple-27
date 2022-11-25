@@ -8,7 +8,7 @@ let filter;
 let filterValue;
 const effectLevelValue = document.querySelector('.effect-level__value');
 
-function filterApply (evt) {
+function applyFilter (evt) {
   if (evt.target.matches('input[id="effect-none"]')){
     sliderWrapper.setAttribute('disabled', true);
     effectLevelValue.setAttribute('value','');
@@ -125,7 +125,7 @@ const startSlider = function () {
     step: 0.1,
     connect: 'lower',
   });
-  filterList.addEventListener('change', filterApply);
+  filterList.addEventListener('change', applyFilter);
 };
 
 

@@ -1,10 +1,11 @@
 const form = document.querySelector('.img-upload__form');
 const overlay = document.querySelector('.img-upload__overlay');
-import { showAlert } from './error-message-generator.js';
-import { img, filterChanger, filterList } from './filterchanger.js';
-import { scaleDown, scaleUp, scaleLower, scaleUpper} from './scale-changer.js';
-import { pressEsc, commentText, popup } from './popupChanger.js';
-const sender = function (evt) {
+const body = document.querySelector('body');
+import { img, chooseFilter, filterList } from './filterchanger.js';
+import { scaleDownButton, scaleUpButton, onScaleDownButtonClick, onScaleUpButtonClick} from './scale-changer.js';
+import { onDocumentKeydown, commentText, popup, openPopup } from './popupChanger.js';
+import {successSend, errorSend} from './send-message.js';
+const sendingData = function (evt) {
   evt.preventDefault();
   const formData = new FormData(evt.target);
   fetch(
@@ -17,47 +18,27 @@ const sender = function (evt) {
     .then((response) => {
       if (response.ok) {
         overlay.classList.add('hidden');
-        form.removeEventListener('submit', sender);
-        showAlert('Успешно', 'green');
-        document.removeEventListener('keydown', pressEsc);
-        filterList.removeEventListener('change', filterChanger);
-        scaleDown.removeEventListener('click', scaleLower);
-        scaleUp.removeEventListener('click', scaleUpper);
-        form.removeEventListener('submit', sender);
+        successSend();
+        body.classList.remove('modal-open');
+        filterList.removeEventListener('change', chooseFilter);
+        scaleDownButton.removeEventListener('click', onScaleDownButtonClick);
+        scaleUpButton.removeEventListener('click', onScaleUpButtonClick);
         popup.value = '';
         commentText.value = '';
         img.removeAttribute('class');
+        popup.addEventListener('change', openPopup);
       }
       else {
-        form.removeEventListener('submit', sender);
-        overlay.classList.add('hidden');
-        showAlert('Ошибка загрузки, попробуйте еще раз', 'red');
-        document.removeEventListener('keydown', pressEsc);
-        filterList.removeEventListener('change', filterChanger);
-        scaleDown.removeEventListener('click', scaleLower);
-        scaleUp.removeEventListener('click', scaleUpper);
-        form.removeEventListener('submit', sender);
-        img.removeAttribute('class');
-        popup.value = '';
-        commentText.value = '';
+        errorSend();
       }
     }
     )
     .catch(() => {
-      overlay.classList.add('hidden');
-      form.removeEventListener('submit', sender);
-      showAlert('Ошибка загрузки, попробуйте еще раз', 'red');
-      document.removeEventListener('keydown', pressEsc);
-      filterList.removeEventListener('change', filterChanger);
-      scaleDown.removeEventListener('click', scaleLower);
-      scaleUp.removeEventListener('click', scaleUpper);
-      form.removeEventListener('submit', sender);
-      img.removeAttribute('class');
-      popup.value = '';
-      commentText.value = '';
+      document.removeEventListener('keydown', onDocumentKeydown);
+      errorSend();
     }
     );
 };
 
-export { form, sender };
+export { form, sendingData };
 
