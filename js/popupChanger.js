@@ -7,20 +7,6 @@ const popupWindow = document.querySelector('.img-upload__overlay');
 const commentText = document.querySelector('.text__description');
 const popupCloseButton = document.querySelector('.img-upload__cancel');
 
-const openPopup = function () {
-  img.setAttribute('style', 'transform:scale(0.55)');
-  scaleValue.value = DEFAULT_SCALE_VALUE;
-  popupWindow.classList.remove('hidden');
-  body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
-  filterList.addEventListener('change', chooseFilter);
-  scaleDownButton.addEventListener('click', onScaleDownButtonClick);
-  scaleUpButton.addEventListener('click', onScaleUpButtonClick);
-  form.addEventListener('submit', sendingData);
-  popupCloseButton.addEventListener('click', closePopup);
-  popup.removeEventListener('change', openPopup);
-};
-
 const onDocumentKeydown = function (evt) {
   if (evt.key === 'Escape'){
     evt.preventDefault();
@@ -30,7 +16,6 @@ const onDocumentKeydown = function (evt) {
     scaleDownButton.removeEventListener('click', onScaleDownButtonClick);
     scaleUpButton.removeEventListener('click', onScaleUpButtonClick);
     body.classList.remove('modal-open');
-    popup.addEventListener('change', openPopup);
     popup.value = '';
     commentText.value = '';
   }
@@ -49,10 +34,23 @@ const closePopup = function (evt) {
   form.removeEventListener('submit', sendingData);
   img.removeAttribute('class');
   popupCloseButton.removeEventListener('click', closePopup);
-  popup.addEventListener('change', openPopup);
+};
+
+const openPopup = function () {
+  img.setAttribute('style', 'transform:scale(0.55)');
+  scaleValue.value = DEFAULT_SCALE_VALUE;
+  popupWindow.classList.remove('hidden');
+  body.classList.add('modal-open');
+  document.addEventListener('keydown', onDocumentKeydown);
+  filterList.addEventListener('change', chooseFilter);
+  scaleDownButton.addEventListener('click', onScaleDownButtonClick);
+  scaleUpButton.addEventListener('click', onScaleUpButtonClick);
+  form.addEventListener('submit', sendingData);
+  popupCloseButton.addEventListener('click', closePopup);
+  popup.removeEventListener('change', openPopup);
 };
 
 const openImageUploadPopup = function () {
-  popup.addEventListener('change', openPopup)}
+  popup.addEventListener('change', openPopup);};
 
 export{onDocumentKeydown, commentText, popup, openPopup, openImageUploadPopup};

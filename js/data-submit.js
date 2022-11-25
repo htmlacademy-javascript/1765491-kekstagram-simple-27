@@ -4,7 +4,7 @@ const body = document.querySelector('body');
 import { img, chooseFilter, filterList } from './filterchanger.js';
 import { scaleDownButton, scaleUpButton, onScaleDownButtonClick, onScaleUpButtonClick} from './scale-changer.js';
 import { onDocumentKeydown, commentText, popup, openPopup } from './popupChanger.js';
-import {successSend, errorSend} from './send-message.js';
+import {sendSucces, sendError} from './send-message.js';
 const sendingData = function (evt) {
   evt.preventDefault();
   const formData = new FormData(evt.target);
@@ -18,7 +18,7 @@ const sendingData = function (evt) {
     .then((response) => {
       if (response.ok) {
         overlay.classList.add('hidden');
-        successSend();
+        sendSucces();
         body.classList.remove('modal-open');
         filterList.removeEventListener('change', chooseFilter);
         scaleDownButton.removeEventListener('click', onScaleDownButtonClick);
@@ -29,13 +29,13 @@ const sendingData = function (evt) {
         popup.addEventListener('change', openPopup);
       }
       else {
-        errorSend();
+        sendError();
       }
     }
     )
     .catch(() => {
       document.removeEventListener('keydown', onDocumentKeydown);
-      errorSend();
+      sendError();
     }
     );
 };
