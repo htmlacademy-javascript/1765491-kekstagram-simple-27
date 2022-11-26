@@ -1,6 +1,8 @@
 import {img,chooseFilter,filterList} from './filterchanger.js';
 import {scaleDownButton, scaleUpButton, onScaleDownButtonClick, onScaleUpButtonClick, scaleValue, DEFAULT_SCALE_VALUE} from './scale-changer.js';
 import { form, sendingData } from './data-submit.js';
+import {onErrorMessageKeydown} from './send-message.js';
+import { openPopupWindow } from './help-function.js';
 const body = document.querySelector('body');
 const popup = document.querySelector('#upload-file');
 const popupWindow = document.querySelector('.img-upload__overlay');
@@ -16,6 +18,8 @@ const onDocumentKeydown = function (evt) {
     scaleDownButton.removeEventListener('click', onScaleDownButtonClick);
     scaleUpButton.removeEventListener('click', onScaleUpButtonClick);
     body.classList.remove('modal-open');
+    openPopupWindow();
+    body.removeEventListener('keydown', onErrorMessageKeydown);
     popup.value = '';
     commentText.value = '';
   }
@@ -27,6 +31,7 @@ const closePopup = function (evt) {
   body.classList.remove('modal-open');
   popup.value = '';
   commentText.value = '';
+  openPopupWindow();
   document.removeEventListener('keydown', onDocumentKeydown);
   filterList.removeEventListener('change', chooseFilter);
   scaleDownButton.removeEventListener('click', onScaleDownButtonClick);
