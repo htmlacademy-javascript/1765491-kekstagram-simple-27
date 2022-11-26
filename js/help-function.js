@@ -1,14 +1,22 @@
-import { overlayErrorRemover, overlaySuccesRemover } from './send-message.js';
+import { removeOverlayError, removeOverlaySucces } from './send-message.js';
 import { body } from './send-message.js';
+import { openPopup, popup } from './popupChanger.js';
 
 
-const removerBodySuccessListener = function () {
-  body.removeEventListener('click', overlayErrorRemover);
+const deleteBodySuccessListener = function () {
+  body.removeEventListener('click', removeOverlayError);
 };
 
 
-const removerBodyErrorListener = function () {
-  body.removeEventListener('click', overlaySuccesRemover);
+const deleteBodyErrorListener = function () {
+  body.removeEventListener('click', removeOverlaySucces);
 };
 
-export {removerBodyErrorListener, removerBodySuccessListener};
+const openPopupWindow = function () {
+  popup.addEventListener('change', openPopup);
+};
+
+export {deleteBodyErrorListener, deleteBodySuccessListener, openPopupWindow};
+
+
+// popup.addEventListener('change', openPopup);

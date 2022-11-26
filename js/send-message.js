@@ -1,6 +1,6 @@
 import {form, sendingData} from './data-submit.js';
 import { onDocumentKeydown } from './popupChanger.js';
-import { removerBodyErrorListener, removerBodySuccessListener } from './help-function.js';
+import { deleteBodyErrorListener, deleteBodySuccessListener } from './help-function.js';
 const succesMessage = document.querySelector('#success').content;
 const successMessageContent = succesMessage.querySelector('.success');
 const body = document.querySelector('body');
@@ -11,7 +11,7 @@ const onSuccessMessageKeydown = function (evt) {
   if (evt.key === 'Escape'){
     successMessageContent.remove();
     document.removeEventListener('keydown', onSuccessMessageKeydown);
-    removerBodyErrorListener();
+    deleteBodyErrorListener();
   }
 };
 
@@ -19,36 +19,39 @@ const onErrorMessageKeydown = function(evt) {
   if (evt.key === 'Escape'){
     errorMessageContent.remove();
     body.removeEventListener('keydown', onErrorMessageKeydown);
-    removerBodySuccessListener();
+    deleteBodySuccessListener();
   }
 };
 
-const overlaySuccesRemover = function(evt) {
+const removeOverlaySucces = function(evt) {
   const div = document.querySelector('.success__inner');
   if (evt.target !== div) {
     successMessageContent.remove();
-    body.removeEventListener('click', overlaySuccesRemover);
+    body.removeEventListener('click', removeOverlaySucces);
     document.removeEventListener('keydown', onSuccessMessageKeydown);
   }
 };
 
-const overlayErrorRemover = function(evt) {
+const removeOverlayError = function(evt) {
   const div = document.querySelector('.error__inner');
   if (evt.target !== div) {
     errorMessageContent.remove();
-    body.removeEventListener('click', overlayErrorRemover);
+    document.removeEventListener('keydown', onSuccessMessageKeydown);
+    body.removeEventListener('click', removeOverlayError);
+
   }
 };
 
 const succesMessageRemove = function() {
   successMessageContent.remove();
-  body.removeEventListener('click', overlaySuccesRemover);
+  body.removeEventListener('click', removeOverlaySucces);
   document.removeEventListener('keydown', onSuccessMessageKeydown);
 };
 
 const errorMessageRemove = function() {
   errorMessageContent.remove();
-  body.removeEventListener('click', overlayErrorRemover);
+  body.removeEventListener('click', removeOverlayError);
+  body.removeEventListener('keydown', onErrorMessageKeydown);
 };
 
 const sendSucces = function () {
@@ -56,7 +59,7 @@ const sendSucces = function () {
   document.removeEventListener('keydown', onDocumentKeydown);
   const button = document.querySelector('.success__button');
   button.addEventListener('click', succesMessageRemove);
-  body.addEventListener('click', overlaySuccesRemover);
+  body.addEventListener('click', removeOverlaySucces);
   document.addEventListener('keydown', onSuccessMessageKeydown);
   form.removeEventListener('submit', sendingData);
 };
@@ -65,8 +68,8 @@ const sendError = function() {
   body.appendChild(errorMessageContent);
   const button = document.querySelector('.error__button');
   button.addEventListener('click', errorMessageRemove);
-  body.addEventListener('click', overlayErrorRemover);
+  body.addEventListener('click', removeOverlayError);
   body.addEventListener('keydown', onErrorMessageKeydown);
 };
 
-export {sendSucces, sendError, overlayErrorRemover, body, overlaySuccesRemover};
+export {sendSucces, sendError, removeOverlayError, body, removeOverlaySucces, onErrorMessageKeydown};
